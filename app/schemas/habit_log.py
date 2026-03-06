@@ -1,12 +1,5 @@
 from datetime import date
-
 from pydantic import BaseModel, ConfigDict
-from typing import Optional
-
-class HabitLogCreate(BaseModel):
-    habit_id: int
-    date: Optional[date] = None
-
 
 class HabitLogResponse(BaseModel):
     id: int

@@ -1,0 +1,27 @@
+from fastapi import HTTPException
+from app.crud.habit_logs import create_habit_logs, get_habit_logs, delete_habit_logs, get_habit_log_by_id
+from sqlalchemy.ext.asyncio import AsyncSession
+from datetime import date
+
+
+
+async def create_habit_log_service(db: AsyncSession, habit_id: int):
+    existing = await get_habit_logs(db=db, habit_id=habit_id)
+    if any(log.date == date.today() for log in existing):
+        raise HTTPException(status_code=409, detail="Habit log already exists")
+    created_habit = await create_habit_logs(db=db, habit_id=habit_id, date=date.today(), is_completed=True)
+    return created_habit
+
+async def get_habit_log_service(db: AsyncSession, habit_id: int):
+    result = await get_habit_logs(db=db, habit_id=habit_id)
+    if not result:
+        raise HTTPException(status_code=404, detail="Habit log does not exist")
+    return result
+
+async def delete_habit_log_service(db: AsyncSession, log_id: int):
+    result = await get_habit_log_by_id(db=db, log_id=log_id)
+    if not result:
+        raise HTTPException(status_code=404, detail="Habit log does not exist")
+    deleted = await delete_habit_logs(db=db, log_id=log_id)
+    return {"habit_log": "deleted"}
+
