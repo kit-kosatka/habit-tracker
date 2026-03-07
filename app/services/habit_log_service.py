@@ -1,8 +1,7 @@
 from fastapi import HTTPException
 from app.crud.habit_logs import create_habit_logs, get_habit_logs, delete_habit_logs, get_habit_log_by_id
 from sqlalchemy.ext.asyncio import AsyncSession
-from datetime import date
-
+from datetime import date, timedelta
 
 
 async def create_habit_log_service(db: AsyncSession, habit_id: int):
@@ -24,4 +23,16 @@ async def delete_habit_log_service(db: AsyncSession, log_id: int):
         raise HTTPException(status_code=404, detail="Habit log does not exist")
     deleted = await delete_habit_logs(db=db, log_id=log_id)
     return {"habit_log": "deleted"}
+
+def calculate_streak(logs):
+    streak = 0
+    check_day = date.today()
+    log_dates = {log.date for log in logs}
+
+    while check_day in log_dates:
+        streak += 1
+        check_day -= timedelta(days=1)
+
+    return streak
+
 

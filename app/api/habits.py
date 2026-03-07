@@ -3,7 +3,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_db
 from app.schemas.habit import HabitCreate, HabitRead, HabitUpdate
 from app.schemas.habit_log import HabitLogResponse
-from app.services.habit_log_service import get_habit_log_service, create_habit_log_service, delete_habit_log_service
+from app.services.habit_log_service import get_habit_log_service, create_habit_log_service, delete_habit_log_service, \
+    calculate_streak
 from app.services.habit_service import create_hab, get_hab, update_hab, delete_hab
 from app.dependencies.depends import get_current_user
 from typing import List
@@ -50,3 +51,9 @@ async def create_habits_logs(habit_id: int, db: AsyncSession = Depends(get_db), 
 async def delete_habit_logs(habit_id: int, log_id: int, db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
     result = await delete_habit_log_service(db=db, log_id=log_id)
     return {"logs": "deleted"}
+
+@router.get("/{habit_id}/streak")
+async def streak(habit_id: int, db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    logs = await get_habit_log_service(db=db, habit_id=habit_id)
+    check_streak = calculate_streak(logs)
+    return {"streak": check_streak}
