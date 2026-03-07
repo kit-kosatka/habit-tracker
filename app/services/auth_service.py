@@ -19,4 +19,4 @@ async def login_user(session: AsyncSession, user_data: UserLogin):
         raise HTTPException(status_code=400, detail="Invalid credentials")
     access_token = create_access_token(data={"sub": user.email})
     refresh_token = create_refresh_token(data={"sub": user.email})
-    return {"token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
+    return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}

@@ -14,7 +14,7 @@ class HabitUpdate(BaseModel):
 class HabitRead(BaseModel):
     id: int
     title: str
-    description: str
+    description: Optional[str] = None
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)

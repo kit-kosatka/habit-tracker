@@ -1,12 +1,13 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr, StringConstraints
+from typing import Annotated
 
 
 class UserCreate(BaseModel):
-    email: str
-    password: str
+    email: EmailStr
+    password: Annotated[str, StringConstraints(min_length=8)]
 
 class UserLogin(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 class UserRead(BaseModel):
