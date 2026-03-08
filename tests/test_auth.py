@@ -4,19 +4,6 @@ import pytest
 import uuid
 from app.main import app
 
-"""client = TestClient(app)
-
-def test_register_success():
-    email = f"{uuid.uuid4()}@test.com"
-    response = client.post("/auth/register", json={"email": email, "password": "123456"})
-    assert response.status_code == 201"""
-
-
-
-
-
-
-
 import pytest
 import uuid
 from httpx import AsyncClient, ASGITransport
