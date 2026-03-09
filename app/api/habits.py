@@ -18,8 +18,8 @@ async def create(habit_in: HabitCreate, db: AsyncSession = Depends(get_db), curr
     return result
 
 @router.get("/read", response_model=List[HabitRead])
-async def get_read_all(db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
-    result = await get_hab(db=db, user_id=current_user.id)
+async def get_read_all(limit: int = 10, offset: int = 0, desc_order: bool = True, db: AsyncSession = Depends(get_db), current_user = Depends(get_current_user)):
+    result = await get_hab(db=db, user_id=current_user.id, limit=limit, offset=offset, desc_order=desc_order)
     return result
 
 @router.get("/read/{habit_id}", response_model=HabitRead)

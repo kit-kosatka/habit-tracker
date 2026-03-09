@@ -8,9 +8,9 @@ async def create_hab(db: AsyncSession, habit_in: HabitCreate, user_id):
     new_habit = await create_habits(db=db,title=habit_in.title, description=habit_in.description, user_id=user_id)
     return new_habit
 
-async def get_hab(db: AsyncSession, user_id: int, habit_id: int | None = None):
+async def get_hab(db: AsyncSession, user_id: int, habit_id: int | None = None, limit: int = 10, offset: int = 0, desc_order: bool = True):
     if habit_id is None:
-        get_habits = await get_habits_by_user(db=db, user_id=user_id)
+        get_habits = await get_habits_by_user(db=db, user_id=user_id, limit=limit, offset=offset, desc_order=desc_order)
         return get_habits
     else:
         get_habits = await get_habit_by_user(db=db, user_id=user_id, habit_id=habit_id)

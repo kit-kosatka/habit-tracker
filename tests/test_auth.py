@@ -1,9 +1,3 @@
-from fastapi.testclient import TestClient
-from app.main import app
-import pytest
-import uuid
-from app.main import app
-
 import pytest
 import uuid
 from httpx import AsyncClient, ASGITransport
