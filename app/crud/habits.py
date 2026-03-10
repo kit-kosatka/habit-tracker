@@ -1,7 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.models.habit import Habit
-from sqlalchemy.orm import joinedload
 
 
 async def create_habits(db: AsyncSession, title: str, description: str, user_id: int):
