@@ -3,13 +3,16 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
 
+
 class HabitCreate(BaseModel):
     title: str
     description: Optional[str] = None
 
+
 class HabitUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
+
 
 class HabitRead(BaseModel):
     id: int

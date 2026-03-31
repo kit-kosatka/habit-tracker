@@ -1,6 +1,8 @@
 import os
 
-os.environ["DATABASE_URL"] = "postgresql+asyncpg://user:password@localhost:5432/habitdb_test"
+os.environ["DATABASE_URL"] = (
+    "postgresql+asyncpg://user:password@localhost:5432/habitdb_test"
+)
 
 import pytest
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession

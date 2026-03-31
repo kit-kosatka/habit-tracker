@@ -1,6 +1,7 @@
 from datetime import date
 from pydantic import BaseModel, ConfigDict
 
+
 class HabitLogResponse(BaseModel):
     id: int
     habit_id: int
