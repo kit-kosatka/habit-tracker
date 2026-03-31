@@ -8,7 +8,6 @@ from app.crud.habit_logs import (
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import date, timedelta
 from app.models.habit_log import HabitLog
-from sqlalchemy import Sequence
 
 
 async def create_habit_log_service(db: AsyncSession, habit_id: int) -> HabitLog:
@@ -21,7 +20,7 @@ async def create_habit_log_service(db: AsyncSession, habit_id: int) -> HabitLog:
     return created_habit
 
 
-async def get_habit_log_service(db: AsyncSession, habit_id: int) -> Sequence[HabitLog]:
+async def get_habit_log_service(db: AsyncSession, habit_id: int) -> list[HabitLog]:
     result = await get_habit_logs(db=db, habit_id=habit_id)
     if not result:
         raise HTTPException(status_code=404, detail="Habit log does not exist")

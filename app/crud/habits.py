@@ -1,7 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.models.habit import Habit
-from sqlalchemy import Sequence
+
+
 
 
 async def create_habits(
@@ -20,7 +21,7 @@ async def get_habits_by_user(
     limit: int = 10,
     offset: int = 0,
     desc_order: bool = True,
-) -> Sequence[Habit]:
+) -> list[Habit]:
     user_habits = select(Habit).where(Habit.user_id == user_id)
     if desc_order:
         user_habits = user_habits.order_by(Habit.id.desc())

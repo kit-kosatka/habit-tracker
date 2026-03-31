@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.models.habit_log import HabitLog
 from datetime import date
-from sqlalchemy import Sequence
+
 
 
 async def create_habit_logs(
@@ -15,7 +15,7 @@ async def create_habit_logs(
     return habit_log
 
 
-async def get_habit_logs(db: AsyncSession, habit_id: int) -> Sequence[HabitLog]:
+async def get_habit_logs(db: AsyncSession, habit_id: int) -> list[HabitLog]:
     habit_log = await db.execute(select(HabitLog).where(HabitLog.habit_id == habit_id))
     result = habit_log.scalars().all()
     return result
