@@ -21,6 +21,11 @@ REST API project for tracking and counting habits.
 - Track daily habit completion
 - Calculate streak
 
+## Screenshots
+
+![Swagger UI](docs/swagger.png)
+![Register Example](docs/register.png)
+
 ## Launch with Docker
 
 1. Clone the repository
