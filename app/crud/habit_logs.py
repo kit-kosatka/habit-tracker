@@ -4,7 +4,6 @@ from app.models.habit_log import HabitLog
 from datetime import date
 
 
-
 async def create_habit_logs(
     db: AsyncSession, habit_id: int, log_date: date, is_completed: bool
 ) -> HabitLog:

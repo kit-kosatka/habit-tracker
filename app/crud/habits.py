@@ -3,8 +3,6 @@ from sqlalchemy import select
 from app.models.habit import Habit
 
 
-
-
 async def create_habits(
     db: AsyncSession, title: str, description: str, user_id: int
 ) -> Habit:
