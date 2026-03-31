@@ -5,7 +5,7 @@ from app.main import app
 
 
 @pytest.mark.asyncio
-async def test_register_succuess():
+async def test_register_success():
     email = f"{uuid.uuid4()}@test.com"
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
